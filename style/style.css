@@ -1,0 +1,151 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+/* Estilos de formulario */
+form {
+    max-width: 80vw;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 10px;
+    
+    
+    
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+form input[type="text"],
+form input[type="number"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Estilos de la tabla de presupuestos */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    
+}
+/* Estilos para las celdas de la tabla que contienen botones */
+table td {
+    padding: 5px; /* Ajusta el espaciado interno de las celdas */
+}
+
+/* Estilos para los botones dentro de las celdas */
+table td button {
+    padding: 8px 12px; /* Ajusta el tamaño de los botones */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+/* Botón de exportar a PDF */
+.btn-exportar-pdf {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 9999;
+    font-weight: bold;
+}
+
+.popup.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.popup.error {
+    background-color: #FF5733;
+    color: white;
+}
+
+/* Estilos responsivos */
+@media screen and (max-width: 768px) {
+    form {
+        max-width: 90%;
+    }
+    table {
+        font-size: 12px;
+    }
+    .btn-exportar-pdf {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    form {
+        max-width: 80vw;
+        padding: 10px;
+    }
+    form input[type="text"],
+    form input[type="number"],
+    form textarea,
+    form select {
+        padding: 5px;
+        
+    }
+    table {
+        font-size: 10px;
+    }
+}
