@@ -1,5 +1,11 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../style/style.css">
 <!-- Formulario para ingresar datos de Fabricante -->
-<form action="procesar_fabricante.php" method="POST">
+<form action="../procesar_fabricante.php" method="POST" target="_top">
     <h2>Fabricante</h2>
     <label for="nombre_fabricante">Nombre del Fabricante:</label>
     <input type="text" name="nombre_fabricante" required>
@@ -33,3 +39,5 @@
         mostrarMensaje("No se ha podido ingresar los datos", "error");
     }
 </script>
+</body>
+</html>

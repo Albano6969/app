@@ -1,28 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../style/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <!-- Formulario para ingresar datos de Acabado -->
-<form action="procesar_acabado.php" method="POST">
+<form action="../procesar_acabado.php" method="POST" target="_top">
         <h2>Acabado</h2>
         <label for="nombre_acabado">Nombre del Acabado:</label>
         <input type="text" name="nombre_acabado" required>
-        <label for="id_serie_acabado">Serie:</label>
-        <select name="id_serie_acabado" required>
+        <label for="fabricante">Fabricante:</label>
+        <select id="fabricante" name="fabricante" required>
+            <option value="">Selecciona un fabricante</option>
             <?php
-            include '../config.php';
-
-            // Consulta SQL para obtener la información de la tabla serie
-            $sql = "SELECT id_serie, nombre_serie FROM serie";
+            include("../../config.php");
+            // Realiza una consulta a la base de datos para obtener los fabricantes
+            $sql = "SELECT id_fabricante, nombre_fabricante FROM fabricantes";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    echo '<option value="' . $row["id_serie"] . '">' . $row["nombre_serie"] . '</option>';
+                    echo '<option value="' . $row["id_fabricante"] . '">' . $row["nombre_fabricante"] . '</option>';
                 }
-            } else {
-                echo '<option value="">No hay series disponibles</option>';
-            }
-
-            // Cierra la conexión a la base de datos
-            $conn->close();
+            };
             ?>
+        </select>
+
+        <label for="serie">Serie:</label>
+        <select id="serie" name="serie" required>
+            <option value="">Selecciona una serie</option>
+            
         </select>
         <input type="submit" value="Guardar Acabado">
     </form>
@@ -43,3 +52,28 @@
         mostrarMensajeExito();
     }
 </script>
+<script>
+        $(document).ready(function() {
+            // Cuando se cambia la selección del fabricante
+            $("#fabricante").on("change", function() {
+                var fabricanteId = $(this).val();
+                
+                if (fabricanteId !== "") {
+                    // Realizar una solicitud AJAX para obtener las series basadas en el fabricante seleccionado
+                    $.ajax({
+                        url: "obtener_series.php", // Reemplaza con la URL de tu script PHP
+                        type: "POST",
+                        data: { fabricanteId: fabricanteId },
+                        success: function(response) {
+                            $("#serie").html(response);
+                        }
+                    });
+                } else {
+                    $("#serie").html('<option value="">Selecciona una serie</option>');
+                    
+                }
+            });
+        });
+    </script>
+</body>
+</html>

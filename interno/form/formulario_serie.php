@@ -1,12 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../style/style.css">
 <!-- Formulario para ingresar datos de Serie -->
-<form action="procesar_serie.php" method="POST">
+<form action="../procesar_serie.php" method="POST" target="_top">
         <h2>Serie</h2>
         <label for="nombre_serie">Nombre de la Serie:</label>
         <input type="text" name="nombre_serie" required>
         <label for="id_fabricante_serie">Fabricante:</label>
             <select name="id_fabricante_serie" required>
                 <?php
-                include '../config.php';
+                include '../../config.php';
 
                 // Consulta SQL para obtener la información de la tabla fabricantes
                 $sql = "SELECT id_fabricante, nombre_fabricante FROM fabricantes";
@@ -43,3 +49,5 @@
         mostrarMensajeExito();
     }
 </script>
+</body>
+</html>

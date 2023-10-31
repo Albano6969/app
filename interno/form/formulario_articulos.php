@@ -1,6 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+</head>
+<body>
+    
+
+
 <!-- Formulario para ingresar datos de Articulos -->
-<form action="procesar_articulo.php" method="POST">
-        <h2>Artículo</h2>
+<form action="../procesar_articulo.php" method="POST" target="_top">
+        <h2>Artículos</h2>
         <label for="funcion_articulo">Función del Artículo:</label>
         <input type="text" name="funcion_articulo" required>
         <label for="descripcion_articulo">Descripción del Artículo:</label>
@@ -9,31 +22,33 @@
         <input type="number" name="precio_articulo" step="0.01" required>
         <label for="referencia_articulo">Referencia del Artículo:</label>
         <input type="text" name="referencia_articulo" required>
-        <label for="id_serie_articulo">Serie:</label>
-            <select name="id_serie_articulo" required>
-                <?php
-                include '../config.php';
+        <label for="fabricante">Fabricante:</label>
+        <select id="fabricante" name="fabricante" required>
+            <option value="">Selecciona un fabricante</option>
+            <?php
+            include("../../config.php");
+            // Realiza una consulta a la base de datos para obtener los fabricantes
+            $sql = "SELECT id_fabricante, nombre_fabricante FROM fabricantes";
+            $result = $conn->query($sql);
 
-                // Consulta SQL para obtener la información de la tabla serie
-                $sql = "SELECT id_serie, nombre_serie FROM serie";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<option value="' . $row["id_serie"] . '">' . $row["nombre_serie"] . '</option>';
-                    }
-                } else {
-                    echo '<option value="">No hay series disponibles</option>';
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<option value="' . $row["id_fabricante"] . '">' . $row["nombre_fabricante"] . '</option>';
                 }
+            };
+            ?>
+        </select>
 
-                // Cierra la conexión a la base de datos
-                $conn->close();
-                ?>
-            </select>
+        <label for="serie">Serie:</label>
+        <select id="serie" name="serie" required>
+            <option value="">Selecciona una serie</option>
+            
+        </select>
         <input type="submit" value="Guardar Artículo">
     </form>
 
     <script>
+        
     // Función para mostrar el mensaje de éxito y luego ocultarlo después de unos segundos
     function mostrarMensajeExito() {
         var mensajeExito = document.getElementById("mensaje-exito");
@@ -49,3 +64,28 @@
         mostrarMensajeExito();
     }
 </script>
+<script>
+        $(document).ready(function() {
+            // Cuando se cambia la selección del fabricante
+            $("#fabricante").on("change", function() {
+                var fabricanteId = $(this).val();
+                
+                if (fabricanteId !== "") {
+                    // Realizar una solicitud AJAX para obtener las series basadas en el fabricante seleccionado
+                    $.ajax({
+                        url: "obtener_series.php", // Reemplaza con la URL de tu script PHP
+                        type: "POST",
+                        data: { fabricanteId: fabricanteId },
+                        success: function(response) {
+                            $("#serie").html(response);
+                        }
+                    });
+                } else {
+                    $("#serie").html('<option value="">Selecciona una serie</option>');
+                    
+                }
+            });
+        });
+    </script>
+</body>
+</html>

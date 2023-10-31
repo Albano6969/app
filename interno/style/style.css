@@ -15,7 +15,18 @@ body {
 h1 {
     text-align: center;
 }
-
+.container {
+    width: 80%; /* Ancho del contenedor central */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ddd;
+    overflow: hidden;
+}
+iframe {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
 /* Estilos de formulario */
 form {
     max-width: 80vw;

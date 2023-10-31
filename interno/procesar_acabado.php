@@ -4,7 +4,7 @@ include '../config.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Recupera los datos del formulario
     $nombre_acabado = $_POST['nombre_acabado'];
-    $id_serie_acabado = $_POST['id_serie_acabado'];
+    $id_serie_acabado = $_POST['serie'];
 
     // Realiza la inserción en la tabla 'acabado' (reemplaza con tu consulta SQL)
     $sql = "INSERT INTO acabado (nombre, id_serie) VALUES (?, ?)";

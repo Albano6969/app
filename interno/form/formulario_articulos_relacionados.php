@@ -10,11 +10,10 @@
 </head>
 <body>
     <h1>Artículos Relacionados</h1>
-    <form action="procesar_articulos_relacionados.php" method="POST">
+    <form action="../procesar_articulos_relacionados.php" method="POST" target="_top">
         <label for="fabricante">Fabricante:</label>
         <select id="fabricante" name="fabricante" required>
             <option value="">Selecciona un fabricante</option>
-            <option value="2">bjc</option>
             <?php
             include("../../config.php");
             // Realiza una consulta a la base de datos para obtener los fabricantes
