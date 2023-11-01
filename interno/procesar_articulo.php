@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $descripcion_articulo = $_POST['descripcion_articulo'];
     $precio_articulo = $_POST['precio_articulo'];
     $referencia_articulo = $_POST['referencia_articulo'];
-    $id_serie_articulo = $_POST['id_serie_articulo'];
+    $id_serie_articulo = $_POST['serie'];
 
     // Realiza la inserción en la tabla 'articulos' (reemplaza con tu consulta SQL)
     $sql = "INSERT INTO articulos (funcion, descripcion, precio, referencia, id_serie) VALUES (?, ?, ?, ?, ?)";

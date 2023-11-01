@@ -19,12 +19,11 @@
             $articuloId = $_GET['id'];
 
             // Consulta SQL para obtener los detalles del artículo, incluyendo fabricante, serie y acabado
-            $sql = "SELECT a.funcion, a.descripcion, a.precio, a.referencia, f.nombre_fabricante, s.nombre AS nombre_serie, ac.nombre AS nombre_acabado
-                    FROM articulos a
-                    INNER JOIN fabricantes f ON a.id_fabricante = f.id_fabricante
-                    INNER JOIN serie s ON a.id_serie = s.id
-                    INNER JOIN acabado ac ON a.id_acabado = ac.id
-                    WHERE a.id_articulo = $articuloId";
+            $sql = "SELECT a.id_articulo, a.funcion, a.descripcion, a.precio, a.referencia, f.nombre_fabricante, s.nombre_serie AS nombre_serie
+            FROM articulos a
+            INNER JOIN serie s ON a.id_serie = s.id_serie
+            INNER JOIN fabricantes f ON s.id_fabricante = f.id_fabricante
+            WHERE a.id_articulo = $articuloId";
 
             $result = $conn->query($sql);
 
@@ -33,16 +32,16 @@
                 echo '<form action="procesar_edicion.php" method="POST">
                     <input type="hidden" name="articulo_id" value="' . $articuloId . '">
                     <label for="funcion">Función del Artículo:</label>
-                    <input type="text" name="funcion" required value="' . $row["funcion"] . '">
+                    <input type="text" name="funcion" required value="' . $row["funcion"] . '" readonly>
                     <label for="descripcion">Descripción del Artículo:</label>
                     <textarea name="descripcion" required>' . $row["descripcion"] . '</textarea>
                     <label for="precio">Precio del Artículo:</label>
                     <input type="number" name="precio" step="0.01" required value="' . $row["precio"] . '">
                     <label for="referencia">Referencia del Artículo:</label>
-                    <input type="text" name="referencia" required value="' . $row["referencia"] . '">
+                    <input type="text" name="referencia" required value="' . $row["referencia"] . '" readonly>
                     <p>Fabricante: ' . $row["nombre_fabricante"] . '</p>
                     <p>Serie: ' . $row["nombre_serie"] . '</p>
-                    <p>Acabado: ' . $row["nombre_acabado"] . '</p>
+                    
                     <input type="submit" value="Guardar Cambios">
                 </form>';
             } else {

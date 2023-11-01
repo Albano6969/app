@@ -27,6 +27,10 @@ iframe {
     width: 100%;
     height: auto;
 }
+p{
+    margin-left: 50px;
+    background-color: #fff;
+}
 /* Estilos de formulario */
 form {
     max-width: 80vw;
