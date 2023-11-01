@@ -2,18 +2,14 @@
 include("config.php");
 
 if (isset($_POST["fabricante"]) && isset($_POST["serie"]) && isset($_POST["acabado"])) {
-    $fabricanteId = $_POST["fabricante"];
     $serieId = $_POST["serie"];
-    $acabadoId = $_POST["acabado"];
 
-    $sql = "SELECT a.unidades, a.funcion, a.referencia, a.descripcion, a.precio_unidad, a.pvp_total
-            FROM articulos AS a
-            INNER JOIN articulos_relacionados AS ar ON a.id_articulo = ar.id_articulo
-            INNER JOIN series AS s ON a.id_serie = s.id_serie
-            WHERE s.id_fabricante = ? AND s.id_serie = ? AND ar.id_acabado = ?";
+    $sql = "SELECT funcion, descripcion, precio, referencia
+            FROM articulos
+            WHERE id_serie = ?";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sss", $fabricanteId, $serieId, $acabadoId);
+    $stmt->bind_param("s", $serieId);
     $stmt->execute();
 
     $result = $stmt->get_result();

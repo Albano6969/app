@@ -117,8 +117,8 @@ include 'config.php';
      <!-- Script para la tabla con todos los productos con validaciones -->
     <script src="script_tabla.js"></script>
 
-<!-- Script para calcular los totales -->
-<script src="script_totales.js"></script>
+    <!-- Script para calcular los totales -->
+    <script src="script_totales.js"></script>
 
 <!-- Script para generar un PDF -->
 <script>
