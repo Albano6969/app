@@ -4,7 +4,7 @@ include("config.php");
 if (isset($_POST["fabricante"]) && isset($_POST["serie"]) && isset($_POST["acabado"])) {
     $serieId = $_POST["serie"];
 
-    $sql = "SELECT funcion, descripcion, precio, referencia
+    $sql = "SELECT id_articulo,funcion, descripcion, precio, referencia
             FROM articulos
             WHERE id_serie = ?";
 
@@ -18,7 +18,30 @@ if (isset($_POST["fabricante"]) && isset($_POST["serie"]) && isset($_POST["acaba
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $productos[] = $row;
+            $producto = $row;
+           
+
+            // Consulta para obtener los productos relacionados
+            $sql_relacionados = "SELECT ar.descripcion, ar.precio, ar.referencia
+            FROM articulo_relacionado ar
+            INNER JOIN articulos a ON ar.id_articulo = a.id_articulo
+            WHERE a.id_articulo = ? AND ar.id_acabado = ?";
+
+            $stmt_relacionados = $conn->prepare($sql_relacionados);
+            $stmt_relacionados->bind_param("ss", $producto['id_articulo'], $_POST["acabado"]);
+            $stmt_relacionados->execute();
+
+            $result_relacionados = $stmt_relacionados->get_result();
+
+            $producto['productos_relacionados'] = array();
+
+            if ($result_relacionados->num_rows > 0) {
+                while ($row_relacionado = $result_relacionados->fetch_assoc()) {
+                    $producto['productos_relacionados'][] = $row_relacionado;
+                }
+            }
+
+            $productos[] = $producto;
         }
     }
 
@@ -30,3 +53,4 @@ if (isset($_POST["fabricante"]) && isset($_POST["serie"]) && isset($_POST["acaba
 
 $conn->close();
 ?>
+

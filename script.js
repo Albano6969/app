@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     // Función para cargar los fabricantes
     function cargarFabricantes() {

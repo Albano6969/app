@@ -93,13 +93,17 @@ include 'config.php';
 
         <div class="totales">
             <label for="descuento">Descuento (%):</label>
-            <input type="number" name="descuento" id="descuento">
+            <input type="number" name="descuento" id="descuento" value="0">
 
-            <label for="total_pvr">Total PVR:</label>
-            <input type="text" name="total_pvr" id="total_pvr" readonly>
+            <div class="total-pvr-container">
+                <label for="total_pvr">Total PVR:</label>
+                <input type="text" name="total_pvr" id="total_pvr" readonly>
+            </div>
 
-            <label for="precio_neto_total">Precio Neto Total:</label>
-            <input type="text" name="precio_neto_total" id="precio_neto_total" readonly>
+            <div class="precio-neto-total-container">
+                <label for="precio_neto_total">Precio Neto Total:</label>
+                <input type="text" name="precio_neto_total" id="precio_neto_total" readonly>
+            </div>
         </div>
 
         <input type="submit" value="Crear Presupuesto">

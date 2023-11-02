@@ -91,3 +91,48 @@ input[type="submit"] {
 input[readonly] {
     background-color: #eee;
 }
+
+/* Estilo general para los elementos de la clase "totales" */
+.totales {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* Estilo para los campos de descuento y sus etiquetas */
+#descuento {
+    text-align: right;
+    margin-right: 10px;
+    width: 10%;
+}
+
+label[for="descuento"] {
+    text-align: right;
+}
+
+/* Estilo para los contenedores de Total PVR y Precio Neto Total y sus etiquetas */
+.total-pvr-container,
+.precio-neto-total-container {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 10px;
+    color: #0066cc; /* Cambia esto al color deseado */
+    font-size: 1.2em; /* Ajusta el tamaño de fuente según tus preferencias */
+    font-weight: bold;
+}
+
+/* Estilo para los campos Total PVR y sus etiquetas */
+#total_pvr, label[for="total_pvr"] {
+    text-align: right;
+}
+
+/* Estilo para el campo Precio Neto Total y su etiqueta */
+#precio_neto_total, label[for="precio_neto_total"] {
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.2em; /* Ajusta el tamaño de fuente según tus preferencias */
+}
+
+
