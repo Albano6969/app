@@ -22,7 +22,7 @@ if (isset($_POST["fabricante"]) && isset($_POST["serie"]) && isset($_POST["acaba
            
 
             // Consulta para obtener los productos relacionados
-            $sql_relacionados = "SELECT ar.descripcion, ar.precio, ar.referencia
+            $sql_relacionados = "SELECT ar.descripcion, ar.precio, ar.referencia, ar.id_articulo AS id_relacionado
             FROM articulo_relacionado ar
             INNER JOIN articulos a ON ar.id_articulo = a.id_articulo
             WHERE a.id_articulo = ? AND ar.id_acabado = ?";
